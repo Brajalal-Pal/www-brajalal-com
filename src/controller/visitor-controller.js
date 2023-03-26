@@ -4,11 +4,16 @@ const Visitor = require("../model/visitor-model");
 exports.getVisitorInfo = async (req, res) => {
   const visitorInfo = await Visitor.find({});
 
-  res.status(200).json(visitorInfo);
+  res.status(200).json({ count: visitorInfo.length });
 };
 
 exports.saveVisitorInfo = async (req, res) => {
-  const newVisitor = new Visitor({ date: new Date().toISOString() });
+  // console.log(":::", req.body);
+
+  // res.send("Hi");
+
+  const newVisitor = new Visitor(req.body);
+  //console.log(newVisitor);
 
   newVisitor
     .save()

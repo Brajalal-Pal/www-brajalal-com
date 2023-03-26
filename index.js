@@ -8,7 +8,7 @@ const visitorRouter = require("./src/router/visitor-router");
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-console.log(process.env.CLIENT);
+//console.log(process.env.CLIENT);
 
 app.use(
   cors({
