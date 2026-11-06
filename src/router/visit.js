@@ -66,9 +66,11 @@ router.post("/visit", async (req, res) => {
     
     const { path, referrer, event } = req.body || {};   
     
-    
-    console.log("******************req***************:", req);
+    const clientIP_1 = req.get("true-client-ip");
+    console.log("Visitor IP (via get):", clientIP_1);
 
+    const clientIP_2 = req.headers["true-client-ip"];
+    console.log("Visitor IP accessed via headers:", clientIP_2);
     
     // Requires correctly configured Express trust proxy.
     // const ip = req.ip;
@@ -97,7 +99,7 @@ router.post("/visit", async (req, res) => {
 
         // Example provider contract:
         // GET /lookup?ip=x.x.x.x
-        // geoUrl.searchParams.set("ip", ip);
+        geoUrl.searchParams.set("ip_address", clientIP_1 || clientIP_2);
 
         console.log("******************geoUrl***************:", geoUrl.toString());
         
