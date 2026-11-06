@@ -67,10 +67,10 @@ router.post("/visit", async (req, res) => {
     const { path, referrer, event } = req.body || {};   
     
     const clientIP_1 = req.get("true-client-ip");
-    console.log("Visitor IP (via get):", clientIP_1);
+    // console.log("Visitor IP (via get):", clientIP_1);
 
     const clientIP_2 = req.headers["true-client-ip"];
-    console.log("Visitor IP accessed via headers:", clientIP_2);
+    // console.log("Visitor IP accessed via headers:", clientIP_2);
     
     // Requires correctly configured Express trust proxy.
     // const ip = req.ip;
@@ -101,7 +101,7 @@ router.post("/visit", async (req, res) => {
         // GET /lookup?ip=x.x.x.x
         geoUrl.searchParams.set("ip_address", clientIP_1 || clientIP_2);
 
-        console.log("******************geoUrl***************:", geoUrl.toString());
+        // console.log("******************geoUrl***************:", geoUrl.toString());
         
         const geoResponse = await fetch(geoUrl, {
             method: "GET",
@@ -120,7 +120,7 @@ router.post("/visit", async (req, res) => {
 
         const geo = await geoResponse.json();
 
-        console.log("******************geo***************:", geo);
+        // console.log("******************geo***************:", geo);
         
         
         let referrerHost = "direct";
