@@ -67,7 +67,7 @@ router.post("/visit", async (req, res) => {
     const { path, referrer, event } = req.body || {};   
     
     
-    // console.log("******************req.body***************:", req.body);
+    console.log("******************req.body***************:", req.body);
 
     
     // Requires correctly configured Express trust proxy.
@@ -99,6 +99,8 @@ router.post("/visit", async (req, res) => {
         // GET /lookup?ip=x.x.x.x
         geoUrl.searchParams.set("ip", ip);
 
+        console.log("******************geoUrl***************:", geoUrl.toString());
+        
         const geoResponse = await fetch(geoUrl, {
             method: "GET",
             headers: {
