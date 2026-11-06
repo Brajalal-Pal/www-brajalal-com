@@ -64,10 +64,16 @@ router.post("/visit", async (req, res) => {
         });
     }
     
-    const { path, referrer, event } = req.body || {};    
+    const { path, referrer, event } = req.body || {};   
+    
+    
+    // console.log("******************req.body***************:", req.body);
+
     
     // Requires correctly configured Express trust proxy.
     const ip = req.ip;
+
+    console.log("******************req.ip***************:", req.ip);
     
     if (!net.isIP(ip)) {
         return res.status(400).json({
@@ -83,17 +89,22 @@ router.post("/visit", async (req, res) => {
             throw new Error("Geo API requires HTTPS");
         }
 
+        // API key is passed as a query parameter.
+        geoUrl.searchParams.set(
+            "api_key",
+            process.env.GEO_API_KEY
+        );
+
         // Example provider contract:
         // GET /lookup?ip=x.x.x.x
         geoUrl.searchParams.set("ip", ip);
 
         const geoResponse = await fetch(geoUrl, {
+            method: "GET",
             headers: {
-                // Change this for providers that use another format.
-                Authorization:
-                    `Bearer ${process.env.GEO_API_KEY}`,
                 Accept: "application/json",
             },
+            redirect: "error",
             signal: AbortSignal.timeout(4000),
         });
 
@@ -104,6 +115,9 @@ router.post("/visit", async (req, res) => {
         }
 
         const geo = await geoResponse.json();
+
+        console.log("******************geo***************:", geo);
+        
         
         let referrerHost = "direct";
 
