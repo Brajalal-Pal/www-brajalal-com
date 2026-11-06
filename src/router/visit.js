@@ -67,19 +67,19 @@ router.post("/visit", async (req, res) => {
     const { path, referrer, event } = req.body || {};   
     
     
-    console.log("******************req.body***************:", req.body);
+    console.log("******************req***************:", req);
 
     
     // Requires correctly configured Express trust proxy.
-    const ip = req.ip;
+    // const ip = req.ip;
 
-    console.log("******************req.ip***************:", req.ip);
+    // console.log("******************req.ip***************:", req.ip);
     
-    if (!net.isIP(ip)) {
-        return res.status(400).json({
-            error: "Unable to determine client IP",
-        }).end();
-    }
+    // if (!net.isIP(ip)) {
+    //     return res.status(400).json({
+    //         error: "Unable to determine client IP",
+    //     }).end();
+    // }
 
     try {
         // Use a fixed, trusted API hostname.
@@ -97,7 +97,7 @@ router.post("/visit", async (req, res) => {
 
         // Example provider contract:
         // GET /lookup?ip=x.x.x.x
-        geoUrl.searchParams.set("ip", ip);
+        // geoUrl.searchParams.set("ip", ip);
 
         console.log("******************geoUrl***************:", geoUrl.toString());
         
