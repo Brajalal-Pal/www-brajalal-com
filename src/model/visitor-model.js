@@ -3,20 +3,6 @@ const Schema = mongoose.Schema;
 
 const visitorSchema = new Schema(
   {
-    // status: { type: String },
-    // country: { type: String },
-    // countryCode: { type: String },
-    // region: { type: String },
-    // regionName: { type: String },
-    // city: { type: String },
-    // zip: { type: String },
-    // lat: { type: String },
-    // lon: { type: String },
-    // timezone: { type: String },
-    // isp: { type: String },
-    // org: { type: String },
-    // as: { type: String },
-    // query: { type: String },
     ip_address: { type: String },
     city: { type: String },
     city_geoname_id: { type: String },
@@ -60,6 +46,9 @@ const visitorSchema = new Schema(
       isp_name: { type: String },
       organization_name: { type: String },
     },
+    path: String,
+    referrerHost: String,
+    event: String,
   },
   { timestamps: true }
 );
